@@ -1,0 +1,50 @@
+---
+import { render } from "astro:content";
+import Base from "../../../layouts/Base.astro";
+import { url } from "../../../config";
+import { getPosts, postUrl, formatDate, isoDate, excerpt, type Post } from "../../../lib/content";
+
+export async function getStaticPaths() {
+  const posts = await getPosts(); // 日期倒序:index 越大越舊
+  return posts.map((post, i) => ({
+    params: { year: String(post.data.date.getUTCFullYear()), slug: post.id },
+    props: {
+      post,
+      older: i < posts.length - 1 ? posts[i + 1] : null,
+      newer: i > 0 ? posts[i - 1] : null,
+    },
+  }));
+}
+
+interface Props {
+  post: Post;
+  older: Post | null;
+  newer: Post | null;
+}
+
+const { post, older, newer } = Astro.props;
+const { Content } = await render(post);
+const cover = post.data.image !== "" ? new URL(post.data.image, Astro.site).href : undefined;
+---
+<Base title={post.data.title} description={excerpt(post.body, 120)} ogImage={cover}>
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">{post.data.title}</h1>
+      <time class="post-date" datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
+    </header>
+
+    {post.data.image !== "" && (
+      <img class="post-cover" src={url(post.data.image)} alt={post.data.title} fetchpriority="high" />
+    )}
+
+    <div class="post-content">
+      <Content />
+    </div>
+
+    <nav class="detail-nav post-nav" aria-label="文章導覽">
+      {older ? <a href={postUrl(older)}>← 較舊:{older.data.title}</a> : <span></span>}
+      <a href={url("/blog/")}>全部文章</a>
+      {newer ? <a href={postUrl(newer)}>較新:{newer.data.title} →</a> : <span></span>}
+    </nav>
+  </article>
+</Base>

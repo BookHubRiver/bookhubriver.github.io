@@ -1,0 +1,18 @@
+---
+import Base from "../../layouts/Base.astro";
+import NewsCard from "../../components/NewsCard.astro";
+import { getNews } from "../../lib/content";
+
+const news = await getNews(); // 日期倒序(規格書 4.4)
+---
+<Base title="最新消息" description="新書發布、活動與創作動態。">
+  <section class="news-page">
+    <h1 class="page-title">最新消息</h1>
+
+    {news.length === 0 && <p class="grid-empty">尚無消息。</p>}
+
+    <div class="news-list">
+      {news.map((item) => <NewsCard item={item} />)}
+    </div>
+  </section>
+</Base>

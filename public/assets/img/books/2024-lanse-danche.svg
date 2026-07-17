@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" role="img" aria-label="《藍色單車日記》封面示意">
+  <rect width="600" height="900" fill="#4c7fa3"/>
+  <rect x="24" y="24" width="552" height="852" fill="none" stroke="#fbf7f0" stroke-opacity="0.45" stroke-width="2"/>
+  <g stroke="#fbf7f0" stroke-width="5" fill="none" opacity="0.85">
+    <circle cx="230" cy="700" r="58"/>
+    <circle cx="400" cy="700" r="58"/>
+    <path d="M230 700 L300 600 L400 700 M300 600 L360 600 M300 600 L268 700"/>
+  </g>
+  <text font-family="serif" font-size="62" fill="#fbf7f0" text-anchor="middle">
+    <tspan x="300" y="140">藍</tspan><tspan x="300" y="218">色</tspan><tspan x="300" y="296">單</tspan><tspan x="300" y="374">車</tspan><tspan x="300" y="452">日</tspan><tspan x="300" y="530">記</tspan>
+  </text>
+  <text x="300" y="836" font-family="sans-serif" font-size="24" fill="#fbf7f0" opacity="0.85" text-anchor="middle">少年小說・封面示意圖</text>
+</svg>

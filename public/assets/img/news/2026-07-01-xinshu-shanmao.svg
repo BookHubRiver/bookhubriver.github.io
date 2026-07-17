@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="新書發布消息示意圖">
+  <rect width="600" height="400" fill="#34406b"/>
+  <rect x="220" y="70" width="160" height="240" fill="#2b3557" stroke="#fbf7f0" stroke-opacity="0.6" stroke-width="2"/>
+  <circle cx="300" cy="230" r="34" fill="#f2b25c"/>
+  <text x="300" y="140" font-family="serif" font-size="26" fill="#fbf7f0" text-anchor="middle">山貓的燈籠</text>
+  <text x="300" y="376" font-family="sans-serif" font-size="20" fill="#fbf7f0" opacity="0.85" text-anchor="middle">消息示意圖:新書發布</text>
+</svg>

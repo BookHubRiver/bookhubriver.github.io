@@ -1,0 +1,24 @@
+---
+import Base from "../../layouts/Base.astro";
+import BookCard from "../../components/BookCard.astro";
+import { getBooks, CATEGORIES } from "../../lib/content";
+
+const books = await getBooks(); // 出版日倒序(規格書 4.2)
+---
+<Base title="作品" description="全部作品——繪本、童話、少年小說、新詩,依出版日期排列。">
+  <section class="books-page">
+    <h1 class="page-title">作品</h1>
+
+    <div class="filter-bar" id="filter-category" aria-label="依類別篩選">
+      <button class="filter-btn is-active" data-filter="all">全部</button>
+      {CATEGORIES.map((c) => (
+        <button class="filter-btn" data-filter={c}>{c}</button>
+      ))}
+    </div>
+
+    <div class="book-grid" id="book-grid">
+      {books.map((book) => <BookCard book={book} />)}
+    </div>
+    <p class="grid-empty" id="grid-empty" hidden>此類別目前沒有作品。</p>
+  </section>
+</Base>

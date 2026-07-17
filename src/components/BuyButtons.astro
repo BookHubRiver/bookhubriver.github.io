@@ -1,0 +1,27 @@
+---
+// 購書按鈕:連結留空時該按鈕不顯示(規格書 6.1);兩者皆空時顯示「準備中」提示。
+// 目前為文字按鈕佔位——上線前請改用兩平台官方徽章圖檔
+// (「在 Apple Books 上取得」「Google Play 立即下載」,依官方使用規範,不自繪仿製)。
+interface Props {
+  title: string; // 書名,用於替代文字(規格書 7 章:寫明目的地)
+  appleUrl: string;
+  googleUrl: string;
+  showPlaceholder?: boolean; // 書籍單頁設 true:兩連結皆空時顯示上架準備中
+}
+
+const { title, appleUrl, googleUrl, showPlaceholder = false } = Astro.props;
+---
+{(appleUrl !== "" || googleUrl !== "") ? (
+  <div class="buy-buttons">
+    {appleUrl !== "" && (
+      <a class="buy-btn buy-btn-apple" href={appleUrl} target="_blank" rel="noopener"
+        aria-label={`前往 Apple Books 購買《${title}》`}>在 Apple Books 上取得</a>
+    )}
+    {googleUrl !== "" && (
+      <a class="buy-btn buy-btn-google" href={googleUrl} target="_blank" rel="noopener"
+        aria-label={`前往 Google Play 圖書購買《${title}》`}>Google Play 立即下載</a>
+    )}
+  </div>
+) : showPlaceholder && (
+  <p class="buy-pending">各平台上架準備中</p>
+)}

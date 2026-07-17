@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" role="img" aria-label="《螢火蟲圖書館》封面示意">
+  <rect width="600" height="900" fill="#3d4a33"/>
+  <rect x="24" y="24" width="552" height="852" fill="none" stroke="#fbf7f0" stroke-opacity="0.45" stroke-width="2"/>
+  <g fill="#e8d573">
+    <circle cx="170" cy="600" r="9"/>
+    <circle cx="260" cy="660" r="6"/>
+    <circle cx="350" cy="590" r="11"/>
+    <circle cx="430" cy="680" r="7"/>
+    <circle cx="300" cy="730" r="9"/>
+    <circle cx="200" cy="760" r="5"/>
+    <circle cx="410" cy="770" r="6"/>
+  </g>
+  <text font-family="serif" font-size="62" fill="#fbf7f0" text-anchor="middle">
+    <tspan x="300" y="140">螢</tspan><tspan x="300" y="218">火</tspan><tspan x="300" y="296">蟲</tspan><tspan x="300" y="374">圖</tspan><tspan x="300" y="452">書</tspan><tspan x="300" y="530">館</tspan>
+  </text>
+  <text x="300" y="836" font-family="sans-serif" font-size="24" fill="#fbf7f0" opacity="0.85" text-anchor="middle">童話・封面示意圖</text>
+</svg>

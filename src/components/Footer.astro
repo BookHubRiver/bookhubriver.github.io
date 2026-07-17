@@ -1,0 +1,22 @@
+---
+import { site, url } from "../config";
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <p>© {year} {site.title}　All rights reserved.</p>
+  <p class="footer-links">
+    {site.appleAuthorUrl !== "" && (
+      <a href={site.appleAuthorUrl} target="_blank" rel="noopener">Apple Books 作者頁</a>
+    )}
+    {site.googleAuthorUrl !== "" && (
+      <a href={site.googleAuthorUrl} target="_blank" rel="noopener">Google Play 作者頁</a>
+    )}
+    {site.instagram !== "" && (
+      <a href={site.instagram} target="_blank" rel="noopener">Instagram</a>
+    )}
+    {site.facebook !== "" && (
+      <a href={site.facebook} target="_blank" rel="noopener">Facebook</a>
+    )}
+    <a href={url("/contact/")}>聯絡</a>
+  </p>
+</footer>

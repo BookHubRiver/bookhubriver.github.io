@@ -1,0 +1,28 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../config";
+
+const igHandle = site.instagram !== ""
+  ? "@" + site.instagram.replace("https://www.instagram.com/", "").replace(/\//g, "")
+  : "";
+---
+<Base title="聯絡" description="出版合作、演講與活動邀約,歡迎來信。">
+  <h1>聯絡</h1>
+
+  <h2>出版合作與邀約</h2>
+  <p>
+    (說明可洽談的事項,讓編輯與主辦單位知道可以談什麼。例:繪本與童書出版合作、
+    校園與圖書館講座、說故事活動、媒體採訪等,歡迎來信洽詢。)
+  </p>
+
+  <p class="contact-email" id="contact-email" data-user={site.emailUser} data-domain={site.emailDomain}>
+    (啟用 JavaScript 以顯示 Email)
+  </p>
+
+  {site.instagram !== "" && (
+    <p>Instagram:<a href={site.instagram} target="_blank" rel="noopener">{igHandle}</a></p>
+  )}
+  {site.facebook !== "" && (
+    <p>Facebook:<a href={site.facebook} target="_blank" rel="noopener">粉絲專頁</a></p>
+  )}
+</Base>

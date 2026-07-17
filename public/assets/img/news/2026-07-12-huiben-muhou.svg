@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="繪本幕後草圖消息示意圖">
+  <rect width="600" height="400" fill="#efe7d8"/>
+  <rect x="60" y="60" width="220" height="280" fill="#fffdf9" stroke="#c9bfa8" stroke-width="2" transform="rotate(-4 170 200)"/>
+  <rect x="320" y="60" width="220" height="280" fill="#fffdf9" stroke="#c9bfa8" stroke-width="2" transform="rotate(3 430 200)"/>
+  <path d="M110 260 q60 -90 130 -20" fill="none" stroke="#8a8578" stroke-width="3" stroke-linecap="round" transform="rotate(-4 170 200)"/>
+  <circle cx="430" cy="200" r="46" fill="none" stroke="#c4622d" stroke-width="3" transform="rotate(3 430 200)"/>
+  <text x="300" y="376" font-family="sans-serif" font-size="20" fill="#8a8578" text-anchor="middle">消息示意圖:幕後草圖</text>
+</svg>

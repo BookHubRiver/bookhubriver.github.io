@@ -1,0 +1,42 @@
+---
+import { site, url } from "../config";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string; // 頁面標題;省略時代表首頁,只顯示網站名稱
+  description?: string;
+  ogImage?: string; // 社群分享預覽圖(絕對網址)
+}
+
+const { title, description = site.description, ogImage } = Astro.props;
+const fullTitle = title ? `${title} | ${site.title}` : site.title;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!DOCTYPE html>
+<html lang={site.lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href={url("/assets/css/main.css")} />
+</head>
+<body>
+  <Header />
+  <main class="site-main fade-in">
+    <slot />
+  </main>
+  <Footer />
+  <script is:inline src={url("/assets/js/main.js")} defer></script>
+</body>
+</html>

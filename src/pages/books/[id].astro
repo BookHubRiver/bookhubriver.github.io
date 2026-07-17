@@ -1,0 +1,132 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import BuyButtons from "../../components/BuyButtons.astro";
+import { site, url } from "../../config";
+import { getBooks, bookUrl, isNew, formatDate, isoDate, excerpt as toExcerpt, type Book } from "../../lib/content";
+
+export async function getStaticPaths() {
+  const books = await getBooks();
+  return books.map((book) => ({
+    params: { id: book.id },
+    props: {
+      book,
+      // 同類別其他作品(規格書 4.3),依出版日倒序
+      related: books.filter((x) => x.id !== book.id && x.data.category === book.data.category),
+    },
+  }));
+}
+
+interface Props {
+  book: Book;
+  related: Book[];
+}
+
+const { book, related } = Astro.props;
+const b = book.data;
+const { Content } = await render(book);
+const description = `《${b.title}》——${b.category}|${site.title}。${toExcerpt(book.body, 80)}`;
+const coverAbs = new URL(b.cover, Astro.site).href;
+
+// Schema.org Book 結構化資料(規格書 7 章)
+const offers = [
+  b.apple_url !== "" && { "@type": "Offer", url: b.apple_url, availability: "https://schema.org/InStock" },
+  b.google_url !== "" && { "@type": "Offer", url: b.google_url, availability: "https://schema.org/InStock" },
+].filter(Boolean);
+
+const jsonLd: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: b.title,
+  author: { "@type": "Person", name: site.title },
+  datePublished: isoDate(b.publish_date),
+  image: coverAbs,
+  bookFormat: "https://schema.org/EBook",
+  inLanguage: "zh-Hant",
+};
+if (b.isbn !== "") jsonLd.isbn = b.isbn;
+if (offers.length > 0) jsonLd.offers = offers;
+---
+<Base title={`${b.title}——${b.category}`} description={description} ogImage={coverAbs}>
+  <article class="book-detail">
+    <div class="book-detail-cover">
+      <img id="book-cover" class="js-zoom" src={url(b.cover)} alt={`《${b.title}》封面`} fetchpriority="high" title="點擊放大" />
+    </div>
+
+    <div class="book-detail-info">
+      <h1 class="book-title">
+        《{b.title}》
+        {isNew(book) && <span class="badge-new">新書</span>}
+      </h1>
+      {b.subtitle !== "" && <p class="book-subtitle">{b.subtitle}</p>}
+
+      <ul class="book-meta">
+        <li>{b.category}</li>
+        <li>出版日期:{formatDate(b.publish_date)}</li>
+        {b.age_range !== "" && <li>適讀年齡:{b.age_range}</li>}
+        {b.isbn !== "" && <li>ISBN:{b.isbn}</li>}
+      </ul>
+
+      <BuyButtons title={b.title} appleUrl={b.apple_url} googleUrl={b.google_url} showPlaceholder />
+
+      <div class="book-description">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  {b.sample_images.length > 0 && (
+    <section class="book-samples" aria-label="試閱">
+      <h2 class="section-title">試閱</h2>
+      <div class="samples-row">
+        {b.sample_images.map((img, i) => (
+          <img class="js-zoom" src={url(img)} alt={`《${b.title}》試閱跨頁 ${i + 1}`} loading="lazy" title="點擊放大" />
+        ))}
+      </div>
+    </section>
+  )}
+
+  {b.excerpt !== "" && (
+    <section class="book-excerpt" aria-label="試閱節錄">
+      <h2 class="section-title">試閱節錄</h2>
+      <blockquote class="excerpt-block">{b.excerpt}</blockquote>
+    </section>
+  )}
+
+  {b.praise.length > 0 && (
+    <section class="book-praise" aria-label="佳評">
+      <h2 class="section-title">佳評</h2>
+      {b.praise.map((p) => (
+        <blockquote class="praise-item">
+          <p>{p.text}</p>
+          <cite>——{p.source}</cite>
+        </blockquote>
+      ))}
+    </section>
+  )}
+
+  {related.length > 0 && (
+    <section class="book-related" aria-label="同類別其他作品">
+      <h2 class="section-title">其他{b.category}作品</h2>
+      <div class="related-row">
+        {related.map((r) => (
+          <a class="related-card" href={bookUrl(r)}>
+            <img src={url(r.data.cover)} alt={`《${r.data.title}》封面`} loading="lazy" />
+            <span>《{r.data.title}》</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <nav class="detail-nav" aria-label="作品導覽">
+    <a href={url("/books/")}>← 回作品列表</a>
+  </nav>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-close" id="lightbox-close" aria-label="關閉">×</button>
+    <img id="lightbox-img" src={url(b.cover)} alt={`《${b.title}》封面`} />
+  </div>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</Base>

@@ -1,0 +1,29 @@
+---
+import Base from "../../layouts/Base.astro";
+import { url } from "../../config";
+import { getPosts, postUrl, formatDate, isoDate, excerpt } from "../../lib/content";
+
+const posts = await getPosts();
+---
+<Base title="網誌" description="創作歷程、作品幕後、活動與講座紀錄。">
+  <section class="blog-page">
+    <h1 class="page-title">網誌</h1>
+
+    {posts.length === 0 && <p class="grid-empty">尚無文章。</p>}
+
+    <div class="post-list">
+      {posts.map((post) => (
+        <a class="post-item" href={postUrl(post)}>
+          {post.data.image !== "" && (
+            <img class="post-item-thumb" src={url(post.data.image)} alt={post.data.title} loading="lazy" />
+          )}
+          <div class="post-item-body">
+            <h2 class="post-item-title">{post.data.title}</h2>
+            <time class="post-date" datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
+            <p class="post-item-excerpt">{excerpt(post.body)}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,40 @@
+---
+import Base from "../layouts/Base.astro";
+import { getBooks, bookUrl } from "../lib/content";
+
+// 出版年表由書籍資料自動生成(規格書 4.6),依年份倒序分組
+const books = await getBooks();
+const years = [...new Set(books.map((b) => b.data.publish_date.getUTCFullYear()))];
+---
+<Base title="關於作者" description="作者簡介、創作理念與出版年表。">
+  <h1>關於作者</h1>
+
+  <div class="about-intro">
+    <p>(作者簡介 300–500 字。請在此介紹創作背景、寫作與繪畫的養成經歷、關注的主題。)</p>
+  </div>
+
+  <h2>創作理念</h2>
+  <p>(圖像創作:談繪本的圖像語言、媒材與說故事的方式。)</p>
+  <p>(文字創作:談童話、少年小說與詩的關注主題與語言追求。)</p>
+
+  <h2>出版年表</h2>
+  <ul class="pub-timeline">
+    {years.map((y) => (
+      <li>
+        <strong>{y}</strong>
+        {books
+          .filter((b) => b.data.publish_date.getUTCFullYear() === y)
+          .map((b) => (
+            <span class="pub-item">
+              <a href={bookUrl(b)}>《{b.data.title}》</a>({b.data.category})
+            </span>
+          ))}
+      </li>
+    ))}
+  </ul>
+
+  <h2>得獎與入選</h2>
+  <ul>
+    <li>(選填。年份+獎項或入選紀錄,無則整段刪除。)</li>
+  </ul>
+</Base>

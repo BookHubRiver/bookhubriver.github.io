@@ -1,0 +1,640 @@
+/* ==========================================================
+   電子書作家網站 — 主樣式
+   視覺:暖米白紙感、書卷氣(規格書 5 章);全站僅一個強調色,
+   讓書封成為主要色彩來源;卡片用極淡圓角+細邊框,不用陰影漸層。
+   ========================================================== */
+
+:root {
+  --bg: #fbf7f0;
+  --text: #2b2926;
+  --text-muted: #8a8578;
+  --accent: #c4622d;
+  --line: #eae4d8;
+  --card-bg: #fffdf9;
+  --radius: 8px;
+  --max-width: 1200px;
+  --space-lg: 80px;
+  --space-md: 48px;
+  --serif: "Noto Serif TC", Georgia, "PMingLiU", serif;
+  --sans: "Noto Sans TC", -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { font-size: 16px; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* hidden 屬性一律優先於各元素的 display 設定(類別篩選、燈箱共用) */
+[hidden] { display: none !important; }
+
+a { color: var(--text); text-decoration: none; transition: opacity 0.2s; }
+a:hover { opacity: 0.75; }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+h1, h2, h3, .site-title { font-family: var(--serif); }
+
+/* ---- 頁首 ---- */
+.site-header {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 28px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.site-nav { display: flex; gap: 32px; }
+.site-nav a {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.site-nav a[aria-current="page"] { color: var(--accent); }
+
+.nav-toggle { display: none; }
+
+/* ---- 主要內容 ---- */
+.site-main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px var(--space-lg);
+  min-height: 60vh;
+}
+
+.page-title, .site-main h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin: var(--space-md) 0 24px;
+}
+
+.site-main h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin: var(--space-md) 0 16px;
+}
+
+.site-main ul { list-style: none; }
+.site-main li { margin-bottom: 8px; }
+
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.section-more { font-size: 0.9rem; color: var(--accent); }
+
+.home-section { margin-top: var(--space-lg); }
+
+/* ---- 首頁 hero:新書發布 ---- */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 48px;
+  align-items: center;
+  margin-top: 24px;
+  padding: 40px;
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.hero-cover img {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.hero-label {
+  color: var(--accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 8px;
+}
+
+.hero-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.hero-subtitle { color: var(--text-muted); margin-bottom: 8px; }
+
+.hero-tagline { margin: 12px 0 20px; }
+
+.hero-more {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 0.92rem;
+  color: var(--accent);
+}
+
+/* ---- 購書按鈕(佔位樣式;上線前換官方徽章圖檔) ---- */
+.buy-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.buy-btn {
+  display: inline-block;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  padding: 10px 20px;
+  border-radius: 6px;
+}
+.buy-btn:hover { opacity: 0.85; }
+
+.buy-pending { color: var(--text-muted); font-size: 0.92rem; }
+
+/* ---- 首頁消息卡片 ---- */
+.news-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.news-card {
+  display: block;
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: background 0.2s;
+}
+a.news-card:hover { opacity: 1; background: #fff; }
+
+.news-card-img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.news-card-body { padding: 16px 18px 18px; }
+
+.news-date { font-size: 0.8rem; color: var(--text-muted); }
+
+.news-card-title {
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin: 4px 0 6px;
+}
+
+.news-card-summary { font-size: 0.9rem; color: var(--text-muted); }
+
+/* ---- 首頁類別入口 ---- */
+.category-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.category-card {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.category-card img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  opacity: 0.92;
+  transition: opacity 0.3s;
+}
+.category-card:hover { opacity: 1; }
+.category-card:hover img { opacity: 1; }
+
+.category-card-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 16px;
+  background: rgba(251, 247, 240, 0.94);
+  font-family: var(--serif);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+/* ---- 作品列表:篩選列與書封網格 ---- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-bottom: 32px;
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px 0;
+  border-bottom: 1px solid transparent;
+}
+.filter-btn.is-active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* 書封為直式,欄數多於畫作站(規格書 4.2:桌機 4/平板 3/手機 2) */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px 24px;
+}
+
+.book-card { display: block; }
+
+.book-cover {
+  position: relative;
+  aspect-ratio: 2 / 3; /* 統一直式比例;方形開本置中留白不裁切 */
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.book-card:hover .book-cover { background: #fff; }
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.badge-new {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.book-card-meta {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.book-card-title { font-size: 0.95rem; }
+.book-card-info { font-size: 0.82rem; color: var(--text-muted); }
+
+.grid-empty { color: var(--text-muted); margin-top: 24px; }
+
+/* ---- 書籍單頁 ---- */
+.book-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 48px;
+  margin-top: var(--space-md);
+  align-items: start;
+}
+
+.book-detail-cover img {
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  cursor: zoom-in;
+}
+
+.book-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+.book-title .badge-new {
+  position: static;
+  vertical-align: 0.3em;
+  margin-left: 8px;
+}
+
+.book-subtitle { color: var(--text-muted); margin-bottom: 12px; }
+
+.book-meta {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 12px 0 20px;
+}
+.book-meta li { margin: 0; }
+
+.book-description { margin-top: 24px; }
+.book-description p { margin-bottom: 14px; }
+.book-description a { color: var(--accent); }
+
+/* 試閱跨頁圖:橫向捲動列 */
+.book-samples, .book-excerpt, .book-praise, .book-related { margin-top: var(--space-md); }
+
+.samples-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.samples-row img {
+  height: 240px;
+  width: auto;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  cursor: zoom-in;
+}
+
+/* 文字試閱:保留原始斷行與空白;字級略大、行高 2.0(規格書 5.2) */
+.excerpt-block {
+  white-space: pre-wrap;
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 2;
+  border-left: 2px solid var(--line);
+  padding-left: 24px;
+  max-width: 640px;
+}
+
+.praise-item {
+  border-left: 2px solid var(--line);
+  padding-left: 24px;
+  margin-bottom: 20px;
+  max-width: 640px;
+}
+.praise-item cite {
+  display: block;
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* 同類別其他作品:橫向小封面列 */
+.related-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.related-card {
+  flex-shrink: 0;
+  width: 120px;
+  font-size: 0.82rem;
+}
+.related-card img {
+  aspect-ratio: 2 / 3;
+  object-fit: contain;
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.detail-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: var(--space-md);
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+.detail-nav a { color: var(--text-muted); }
+.detail-nav a:hover { color: var(--accent); opacity: 1; }
+
+/* ---- 燈箱 ---- */
+.lightbox[hidden] { display: none; }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(251, 247, 240, 0.98);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--text);
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* ---- 消息列表頁 ---- */
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ---- 網誌 ---- */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 720px;
+}
+
+.post-item {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.post-item-thumb {
+  width: 160px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.post-item-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin: 0 0 4px;
+}
+
+.post-date { font-size: 0.82rem; color: var(--text-muted); }
+
+.post-item-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.post { max-width: 720px; margin: var(--space-md) auto 0; }
+
+.post-header { margin-bottom: 32px; }
+.post-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.post-cover { margin-bottom: 32px; border-radius: 4px; }
+
+.post-content h2 { font-size: 1.1rem; margin: 40px 0 12px; }
+.post-content p { margin-bottom: 16px; }
+.post-content img { margin: 24px 0; border-radius: 4px; }
+.post-content a { color: var(--accent); }
+.post-content pre {
+  background: #f3eee5;
+  padding: 16px 20px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin: 16px 0;
+  border-radius: 4px;
+}
+.post-content ul { list-style: disc; padding-left: 24px; margin-bottom: 16px; }
+
+.post-nav { font-size: 0.88rem; flex-wrap: wrap; }
+
+/* ---- 關於:出版年表 ---- */
+.pub-timeline li { margin-bottom: 12px; }
+.pub-timeline strong { font-family: var(--serif); margin-right: 12px; }
+.pub-item { margin-right: 16px; }
+.pub-item a { color: var(--accent); }
+
+/* ---- 聯絡頁 ---- */
+.contact-email { font-size: 1.05rem; margin: 16px 0; }
+.contact-email a { color: var(--accent); }
+
+/* ---- 頁尾 ---- */
+.site-footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 32px 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.site-footer a { color: var(--text-muted); margin-left: 20px; }
+
+/* ---- 淡入動效(規格書 5.4:僅 0.4s 淡入與 hover 輕微變化) ---- */
+.fade-in { animation: fadeIn 0.4s ease both; }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---- 響應式 ---- */
+@media (max-width: 900px) {
+  .book-grid { grid-template-columns: repeat(3, 1fr); }
+  .news-cards, .news-list { grid-template-columns: repeat(2, 1fr); }
+  .category-cards { grid-template-columns: repeat(2, 1fr); }
+
+  .hero { grid-template-columns: 1fr; padding: 28px; gap: 28px; }
+  .hero-cover img { max-width: 280px; }
+
+  .book-detail { grid-template-columns: 1fr; gap: 28px; }
+  .book-detail-cover img { max-width: 320px; margin: 0 auto; }
+}
+
+@media (max-width: 600px) {
+  :root { --space-lg: 48px; --space-md: 32px; }
+
+  .book-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 16px; }
+  .news-cards, .news-list { grid-template-columns: 1fr; }
+
+  .post-item { flex-direction: column; }
+  .post-item-thumb { width: 100%; }
+
+  .nav-toggle {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .nav-toggle-bar {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: var(--text);
+    margin: 7px 0;
+  }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 84px;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    flex-direction: column;
+    padding: 24px;
+    gap: 20px;
+    border-bottom: 1px solid var(--line);
+    z-index: 50;
+  }
+  .site-nav.is-open { display: flex; }
+  .site-header { position: relative; }
+}

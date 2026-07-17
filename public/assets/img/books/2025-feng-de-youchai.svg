@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" role="img" aria-label="《風的郵差》封面示意">
+  <rect width="600" height="900" fill="#7fa08c"/>
+  <rect x="24" y="24" width="552" height="852" fill="none" stroke="#fbf7f0" stroke-opacity="0.45" stroke-width="2"/>
+  <path d="M120 640 q120 -60 240 0 t180 -30" fill="none" stroke="#fbf7f0" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+  <path d="M150 710 q100 -46 200 0 t160 -24" fill="none" stroke="#fbf7f0" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+  <text font-family="serif" font-size="76" fill="#fbf7f0" text-anchor="middle">
+    <tspan x="300" y="190">風</tspan><tspan x="300" y="285">的</tspan><tspan x="300" y="380">郵</tspan><tspan x="300" y="475">差</tspan>
+  </text>
+  <text x="300" y="836" font-family="sans-serif" font-size="24" fill="#fbf7f0" opacity="0.85" text-anchor="middle">童話・封面示意圖</text>
+</svg>

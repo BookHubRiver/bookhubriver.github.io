@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" role="img" aria-label="《潮汐備忘錄》封面示意">
+  <rect width="600" height="900" fill="#f2ecdf"/>
+  <rect x="24" y="24" width="552" height="852" fill="none" stroke="#6e8f8a" stroke-opacity="0.6" stroke-width="2"/>
+  <path d="M90 660 q75 -28 150 0 t150 0 t150 0" fill="none" stroke="#6e8f8a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M90 710 q75 -28 150 0 t150 0 t150 0" fill="none" stroke="#6e8f8a" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <path d="M90 755 q75 -28 150 0 t150 0 t150 0" fill="none" stroke="#6e8f8a" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+  <text font-family="serif" font-size="72" fill="#3f5a56" text-anchor="middle">
+    <tspan x="300" y="160">潮</tspan><tspan x="300" y="250">汐</tspan><tspan x="300" y="340">備</tspan><tspan x="300" y="430">忘</tspan><tspan x="300" y="520">錄</tspan>
+  </text>
+  <text x="300" y="836" font-family="sans-serif" font-size="24" fill="#6e8f8a" text-anchor="middle">新詩・封面示意圖</text>
+</svg>

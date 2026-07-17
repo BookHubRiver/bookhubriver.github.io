@@ -1,0 +1,61 @@
+---
+import Base from "../layouts/Base.astro";
+import BuyButtons from "../components/BuyButtons.astro";
+import NewsCard from "../components/NewsCard.astro";
+import { url } from "../config";
+import { getBooks, getNews, heroBook, bookUrl, tagline, CATEGORIES } from "../lib/content";
+
+const books = await getBooks();
+const hero = heroBook(books);
+const news = (await getNews()).slice(0, 3); // 首頁消息卡片取最新 3 則(規格書 4.1:2–4 則)
+
+// 類別入口:各類取最新一本的封面為代表;該類無書則不顯示卡片
+const categoryCards = CATEGORIES.map((c) => ({
+  category: c,
+  cover: books.find((b) => b.data.category === c),
+})).filter((c) => c.cover !== undefined);
+---
+<Base>
+  {hero && (
+    <section class="hero" aria-label="新書發布">
+      <a class="hero-cover" href={bookUrl(hero)}>
+        <img src={url(hero.data.cover)} alt={`《${hero.data.title}》封面`} fetchpriority="high" />
+      </a>
+      <div class="hero-info">
+        <p class="hero-label">新書發布</p>
+        <h1 class="hero-title">
+          <a href={bookUrl(hero)}>《{hero.data.title}》</a>
+        </h1>
+        {hero.data.subtitle !== "" && <p class="hero-subtitle">{hero.data.subtitle}</p>}
+        <p class="hero-tagline">{tagline(hero.body)}</p>
+        <BuyButtons title={hero.data.title} appleUrl={hero.data.apple_url} googleUrl={hero.data.google_url} />
+        <a class="hero-more" href={bookUrl(hero)}>認識這本書 →</a>
+      </div>
+    </section>
+  )}
+
+  <section class="home-section" aria-label="最新消息">
+    <div class="section-head">
+      <h2 class="section-title">最新消息</h2>
+      <a class="section-more" href={url("/news/")}>全部消息 →</a>
+    </div>
+    <div class="news-cards">
+      {news.map((item) => <NewsCard item={item} />)}
+    </div>
+  </section>
+
+  <section class="home-section" aria-label="作品類別">
+    <div class="section-head">
+      <h2 class="section-title">作品</h2>
+      <a class="section-more" href={url("/books/")}>全部作品 →</a>
+    </div>
+    <div class="category-cards">
+      {categoryCards.map(({ category, cover }) => (
+        <a class="category-card" href={`${url("/books/")}?category=${encodeURIComponent(category)}`}>
+          <img src={url(cover!.data.cover)} alt={`${category}代表作《${cover!.data.title}》封面`} loading="lazy" />
+          <span class="category-card-label">{category}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Base>

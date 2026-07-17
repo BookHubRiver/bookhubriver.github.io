@@ -1,0 +1,21 @@
+---
+import { url } from "../config";
+import { bookUrl, isNew, type Book } from "../lib/content";
+
+interface Props {
+  book: Book;
+}
+
+const { book } = Astro.props;
+const b = book.data;
+---
+<a class="book-card" href={bookUrl(book)} data-category={b.category}>
+  <div class="book-cover">
+    <img src={url(b.cover)} alt={`《${b.title}》封面`} loading="lazy" />
+    {isNew(book) && <span class="badge-new">新書</span>}
+  </div>
+  <div class="book-card-meta">
+    <span class="book-card-title">《{b.title}》</span>
+    <span class="book-card-info">{b.category}・{b.publish_date.getUTCFullYear()}</span>
+  </div>
+</a>

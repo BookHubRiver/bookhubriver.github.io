@@ -1,0 +1,27 @@
+---
+import { url } from "../config";
+import { newsHref, formatDate, isoDate, type News } from "../lib/content";
+
+interface Props {
+  item: News;
+}
+
+const { item } = Astro.props;
+const n = item.data;
+const href = newsHref(n.link);
+const external = href !== undefined && !n.link.startsWith("/");
+const Tag = href !== undefined ? "a" : "article";
+---
+<Tag
+  class="news-card"
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener" : undefined}
+>
+  <img class="news-card-img" src={url(n.image)} alt={n.title} loading="lazy" />
+  <div class="news-card-body">
+    <time class="news-date" datetime={isoDate(n.date)}>{formatDate(n.date)}</time>
+    <h3 class="news-card-title">{n.title}</h3>
+    <p class="news-card-summary">{n.summary}</p>
+  </div>
+</Tag>

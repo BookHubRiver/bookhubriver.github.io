@@ -1,0 +1,29 @@
+---
+import { site, url } from "../config";
+
+const path = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+// 去掉 base 前綴後比對目前頁面
+const p = path.startsWith(base) ? path.slice(base.length) : path;
+
+// 主導覽固定 5 項(規格書 3 章)
+const items = [
+  { href: "/books/", label: "作品", current: p.startsWith("/books") },
+  { href: "/news/", label: "消息", current: p.startsWith("/news") },
+  { href: "/blog/", label: "網誌", current: p.startsWith("/blog") },
+  { href: "/about/", label: "關於", current: p === "/about/" },
+  { href: "/contact/", label: "聯絡", current: p === "/contact/" },
+];
+---
+<header class="site-header">
+  <a class="site-title" href={url("/")}>{site.title}</a>
+  <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="開啟選單">
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+  </button>
+  <nav id="site-nav" class="site-nav">
+    {items.map((item) => (
+      <a href={url(item.href)} aria-current={item.current ? "page" : undefined}>{item.label}</a>
+    ))}
+  </nav>
+</header>

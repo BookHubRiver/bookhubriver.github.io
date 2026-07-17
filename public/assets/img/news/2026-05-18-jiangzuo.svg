@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="講座活動消息示意圖">
+  <rect width="600" height="400" fill="#7fa08c"/>
+  <rect x="150" y="90" width="300" height="190" rx="8" fill="#fffdf9"/>
+  <line x1="185" y1="140" x2="415" y2="140" stroke="#8a8578" stroke-width="6" stroke-linecap="round"/>
+  <line x1="185" y1="180" x2="380" y2="180" stroke="#c9bfa8" stroke-width="5" stroke-linecap="round"/>
+  <line x1="185" y1="215" x2="400" y2="215" stroke="#c9bfa8" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="300" cy="320" r="18" fill="#c4622d"/>
+  <text x="300" y="376" font-family="sans-serif" font-size="20" fill="#fbf7f0" text-anchor="middle">消息示意圖:講座公告</text>
+</svg>
