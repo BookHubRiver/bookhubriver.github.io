@@ -1,5 +1,6 @@
 ---
 title: 月亮裁縫店
+author: 作者一
 category: 繪本
 publish_date: 2025-04-10
 cover: /assets/img/books/2025-yueliang-caifengdian.svg

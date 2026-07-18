@@ -16,6 +16,6 @@ const b = book.data;
   </div>
   <div class="book-card-meta">
     <span class="book-card-title">《{b.title}》</span>
-    <span class="book-card-info">{b.category}・{b.publish_date.getUTCFullYear()}</span>
+    <span class="book-card-info">{b.author.join("、")}・{b.category}・{b.publish_date.getUTCFullYear()}</span>
   </div>
 </a>

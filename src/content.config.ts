@@ -1,5 +1,6 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
+import { AUTHORS } from "./config";
 
 // 書籍:一本書一個 .md 檔,欄位對應規格書 6.1 節;內容簡介寫在 Markdown 內文
 const books = defineCollection({
@@ -8,6 +9,13 @@ const books = defineCollection({
     .object({
       title: z.string(),
       subtitle: z.string().optional().default(""),
+      // 作者:單一作者填字串,合著填字串陣列;一律轉為陣列並檢查是否為工作室作者
+      author: z
+        .union([z.string(), z.array(z.string()).nonempty()])
+        .transform((v) => (Array.isArray(v) ? v : [v]))
+        .refine((arr) => arr.every((a) => (AUTHORS as readonly string[]).includes(a)), {
+          message: `author 必須是工作室作者之一:${AUTHORS.join("、")}`,
+        }),
       category: z.enum(["繪本", "童話", "少年小說", "新詩"]),
       publish_date: z.coerce.date(),
       cover: z.string(),

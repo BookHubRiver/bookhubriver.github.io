@@ -1,5 +1,6 @@
 ---
 title: 潮汐備忘錄
+author: 作者二
 category: 新詩
 publish_date: 2025-01-15
 cover: /assets/img/books/2025-chaoxi-beiwanglu.svg

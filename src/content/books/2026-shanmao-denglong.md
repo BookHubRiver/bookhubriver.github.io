@@ -1,5 +1,6 @@
 ---
 title: 山貓的燈籠
+author: 作者一
 category: 繪本
 publish_date: 2026-06-30
 cover: /assets/img/books/2026-shanmao-denglong.svg

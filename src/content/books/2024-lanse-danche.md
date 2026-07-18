@@ -1,5 +1,6 @@
 ---
 title: 藍色單車日記
+author: 作者二
 subtitle: 夏天結束前的十四天
 category: 少年小說
 publish_date: 2024-09-01

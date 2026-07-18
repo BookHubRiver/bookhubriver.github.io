@@ -25,7 +25,8 @@ interface Props {
 const { book, related } = Astro.props;
 const b = book.data;
 const { Content } = await render(book);
-const description = `《${b.title}》——${b.category}|${site.title}。${toExcerpt(book.body, 80)}`;
+const authorNames = b.author.join("、");
+const description = `《${b.title}》——${b.category}|${authorNames}。${toExcerpt(book.body, 80)}`;
 const coverAbs = new URL(b.cover, Astro.site).href;
 
 // Schema.org Book 結構化資料(規格書 7 章)
@@ -38,7 +39,10 @@ const jsonLd: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "Book",
   name: b.title,
-  author: { "@type": "Person", name: site.title },
+  author:
+    b.author.length === 1
+      ? { "@type": "Person", name: b.author[0] }
+      : b.author.map((a) => ({ "@type": "Person", name: a })),
   datePublished: isoDate(b.publish_date),
   image: coverAbs,
   bookFormat: "https://schema.org/EBook",
@@ -61,6 +65,7 @@ if (offers.length > 0) jsonLd.offers = offers;
       {b.subtitle !== "" && <p class="book-subtitle">{b.subtitle}</p>}
 
       <ul class="book-meta">
+        <li>作者:{authorNames}</li>
         <li>{b.category}</li>
         <li>出版日期:{formatDate(b.publish_date)}</li>
         {b.age_range !== "" && <li>適讀年齡:{b.age_range}</li>}
@@ -118,6 +123,8 @@ if (offers.length > 0) jsonLd.offers = offers;
       </div>
     </section>
   )}
+
+  <p class="book-copyright">本書封面、試閱圖與文字節錄之著作權屬 {authorNames} 與{site.title}所有,未經授權不得轉載。</p>
 
   <nav class="detail-nav" aria-label="作品導覽">
     <a href={url("/books/")}>← 回作品列表</a>

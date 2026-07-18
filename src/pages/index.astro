@@ -1,6 +1,5 @@
 ---
 import Base from "../layouts/Base.astro";
-import BuyButtons from "../components/BuyButtons.astro";
 import NewsCard from "../components/NewsCard.astro";
 import { url } from "../config";
 import { getBooks, getNews, heroBook, bookUrl, tagline, CATEGORIES } from "../lib/content";
@@ -27,8 +26,9 @@ const categoryCards = CATEGORIES.map((c) => ({
           <a href={bookUrl(hero)}>《{hero.data.title}》</a>
         </h1>
         {hero.data.subtitle !== "" && <p class="hero-subtitle">{hero.data.subtitle}</p>}
+        <p class="hero-author">{hero.data.author.join("、")}</p>
         <p class="hero-tagline">{tagline(hero.body)}</p>
-        <BuyButtons title={hero.data.title} appleUrl={hero.data.apple_url} googleUrl={hero.data.google_url} />
+        <!-- 首頁不放購書連結(規格書 4.1):購書按鈕僅出現在書籍單頁 -->
         <a class="hero-more" href={bookUrl(hero)}>認識這本書 →</a>
       </div>
     </section>

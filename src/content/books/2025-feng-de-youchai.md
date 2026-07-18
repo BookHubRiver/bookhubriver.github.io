@@ -1,5 +1,6 @@
 ---
 title: 風的郵差
+author: 作者一
 category: 童話
 publish_date: 2025-11-20
 cover: /assets/img/books/2025-feng-de-youchai.svg

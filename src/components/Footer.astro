@@ -1,9 +1,12 @@
 ---
 import { site, url } from "../config";
+// 著作權年份:起始年–當年(同年時只顯示一個年份);規格書 4.8
 const year = new Date().getFullYear();
+const span = year > site.copyrightStartYear ? `${site.copyrightStartYear}–${year}` : `${year}`;
 ---
 <footer class="site-footer">
-  <p>© {year} {site.title}　All rights reserved.</p>
+  <p>© {span} {site.title} 版權所有</p>
+  <p class="footer-copyright">本站文字、圖像與書籍內容未經授權不得轉載。</p>
   <p class="footer-links">
     {site.appleAuthorUrl !== "" && (
       <a href={site.appleAuthorUrl} target="_blank" rel="noopener">Apple Books 作者頁</a>

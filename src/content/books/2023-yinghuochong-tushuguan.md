@@ -1,5 +1,6 @@
 ---
 title: 螢火蟲圖書館
+author: 作者一
 category: 童話
 publish_date: 2023-05-05
 cover: /assets/img/books/2023-yinghuochong-tushuguan.svg
